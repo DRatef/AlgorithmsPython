@@ -2,20 +2,70 @@ from math import sqrt
 
 from data import critics as data
 
+
+def euc(person1,person2):
+
+    euc_sqr = 0
+    cond = False                         # to avoid such x/0 
+    for k1 in person1:                  # k is the key value of the dict (id of restaurant)
+        for k2 in person2:
+            if(k1 < k2):
+                break
+
+            if(k1 == k2):
+                p1 = person1[k1]
+                p2 = person2[k2]
+                
+                euc_sqr+=((p1-p2)*(p1-p2))                #euclidean algorithm
+                cond =True
+                break
+    if (cond==False):
+        return 0
+  
+    euc_result=sqrt(euc_sqr)                                      #euclidean algorithm
+  
+    return euc_result
+
+
+def pearson(person1,person2):
+    
+
+    pea_sub_p1 = 0                                    #pearson algorithm Variable   
+    pea_sub_p2 = 0
+    pea_sub_sq_p1 = 0
+    pea_sub_sq_p2 = 0
+    pea_sub_p1p2 = 0
+    pea_result=0
+    n=0
+    cond = False                         # to avoid such x/0 
+    for k1 in person1:                  # k is the key value of the dict (id of restaurant)
+        for k2 in person2:
+            if(k1 < k2):
+                break
+
+            if(k1 == k2):
+                p1 = person1[k1]
+                p2 = person2[k2]
+                            
+                pea_sub_p1+=p1                                     #pearson algorithm    
+                pea_sub_p2+=p2
+                pea_sub_sq_p1+=(p1*p1)
+                pea_sub_sq_p2+=(p2*p2)
+                pea_sub_p1p2+=p1*p2
+                n+=1
+                cond =True
+                break
+    if (cond==False):
+        return 0
+    pea_result=((n*pea_sub_p1p2)-(pea_sub_p1*pea_sub_p2))/( sqrt((n*pea_sub_sq_p1-pow(pea_sub_p1,2))(n*pea_sub_sq_p2-pow(pea_sub_p2,2))) )  #pearson algorithm result 
+    
+    return pea_result
+
 def CosinAveraged(person1,person2):    # person1 , person2 is dictionary have (id of Restaurant) and (rating)
     cos_bast = 0
     cos_sqr1 = 0
     cos_sqr2 = 0
    
-    #euc_sqr = 0
-
-    #pea_sub_p1 = 0                                    #pearson algorithm Variable   
-    #pea_sub_p2 = 0
-    #pea_sub_sq_p1 = 0
-    #pea_sub_sq_p2 = 0
-    #pea_sub_p1p2 = 0
-    #pea_result=0
-    #n=0
     cond = False                         # to avoid such x/0 
     for k1 in person1:                  # k is the key value of the dict (id of restaurant)
         for k2 in person2:
@@ -29,23 +79,16 @@ def CosinAveraged(person1,person2):    # person1 , person2 is dictionary have (i
                 cos_sqr1+=p1 * p1
                 cos_sqr2+=p2 * p2
                 
-                #euc_sqr+=((p1-p2)*(p1-p2))                #euclidean algorithm
-                            
-                #pea_sub_p1+=p1                                     #pearson algorithm    
-                #pea_sub_p2+=p2
-                #pea_sub_sq_p1+=(p1*p1)
-                #pea_sub_sq_p2+=(p2*p2)
-                #pea_sub_p1p2+=p1*p2
-                #n+=1
                 cond =True
                 break
     if (cond==False):
         return 0
     cos_result = cos_bast / ((sqrt(cos_sqr1)) * (sqrt(cos_sqr2))) ##cos algorithm result
-  #  euc_result=sqrt(euc_sqr)                                      #euclidean algorithm
-  #  pea_result=((n*pea_sub_p1p2)-(pea_sub_p1*pea_sub_p2))/( sqrt((n*pea_sub_sq_p1-pow(pea_sub_p1,2))(n*pea_sub_sq_p2-pow(pea_sub_p2,2))) )  #pearson algorithm result 
+  
+
 
     return cos_result
+
 
 
 
